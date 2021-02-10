@@ -1,12 +1,12 @@
-import book_info.Book;
-import book_info.BookUtils;
-import file_operations.CreateWriteRead;
-import manage_input.*;
+import book.info.Book;
+import book.info.BookUtils;
+import file.operations.*;
+import manage.input.*;
 import menu.UserMenuOptions;
 import utils.ConstantValues;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Demo {
     public static void main(String[] args) throws IOException {
@@ -19,7 +19,7 @@ public class Demo {
         userPass.setPassword();
 
         //If user exists then check if password is correct, else create a new user.
-        if (CreateWriteRead.userExists(userPass.getName())) {
+        if (UserOperations.userExists(userPass.getName())) {
             while (true) {
                 if (NameAndPassword.validatePassword(userPass.getName(), userPass.getPassword())) {
                     System.out.printf("Hi %s, you have successfully logged in.%n", userPass.getName());
@@ -30,36 +30,50 @@ public class Demo {
                 }
             }
         } else {
-            CreateWriteRead.CreateUserFile(userPass.getName(), userPass.getPassword());
+            UserOperations.createUserFile(userPass.getName(), userPass.getPassword());
         }
 
         //Load current library
-        ArrayList<Book> books = new ArrayList<>();
+        HashMap<String, Book> books = LibraryOperations.readLibrary();
 
+        main_loop:
+        while (true) {
 
-        UserMenuOptions.mainMenu();
+            UserMenuOptions.mainMenu();
 
-        byte num = ConstantValues.sc.nextByte();
+            byte num = ConstantValues.SC.nextByte();
+            ConstantValues.SC.nextLine();
 
-        switch (num){
-            case 1:
-                BookUtils.addBook(books);
-                break;
-            case 2:
-                System.out.println("You pressed 2");
-                break;
-            default:
-                System.out.println("Please enter valid number");
+            switch (num) {
+                case 0:
+                    System.out.println("Thank you for using the library, " + userPass.getName() + " :)");
+                    break main_loop;
+                case 1:
+                    BookUtils.addBook(books);
+                    break;
+                case 2:
+                    System.out.println("You pressed 2");
+                    break;
+                case 3:
+                    System.out.println("You pressed 3");
+                    break;
+                case 4:
+                    System.out.println("You pressed 4");
+                    break;
+                case 5:
+                    BookUtils.rateBook(books);
+                    break;
+                case 6:
+                    BookUtils.listAllBooks(books);
+                    break;
+                default:
+                    System.out.println("Please enter valid number");
+            }
         }
 
-        BookUtils.addBook(books);
+        //Write the current state of the library.
+        LibraryOperations.writeLibrary(books);
 
-        BookUtils.rateBook(books);
-        BookUtils.listAllBooks(books);
-        BookUtils.rateBook(books);
-        BookUtils.listAllBooks(books);
-        BookUtils.rateBook(books);
-        BookUtils.listAllBooks(books);
 
     }
 }
