@@ -4,8 +4,7 @@ import book.info.Book;
 import utils.ConstantValues;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class LibraryOperations {
 
@@ -28,6 +27,7 @@ public class LibraryOperations {
             b.setAuthor(bufferreader.readLine());
             b.setResume(bufferreader.readLine());
             b.setRating(Double.parseDouble(bufferreader.readLine()) / Double.parseDouble(bufferreader.readLine()));
+            b.setVoters(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
 
             h.put(b.getIsbn(), b);
         }
@@ -52,7 +52,8 @@ public class LibraryOperations {
                 myWriter.write(books.get(isbn).getAuthor() + "\n");
                 myWriter.write(books.get(isbn).getResume() + "\n");
                 myWriter.write(books.get(isbn).getRating().split("\\|")[0] + "\n");
-                myWriter.write(books.get(isbn).getRating().split("\\|")[1]);
+                myWriter.write(books.get(isbn).getRating().split("\\|")[1] + "\n");
+                myWriter.write(books.get(isbn).getVoters());
                 myWriter.close();
             }
             else {
@@ -62,7 +63,8 @@ public class LibraryOperations {
                 myWriter.write(books.get(isbn).getAuthor() + "\n");
                 myWriter.write(books.get(isbn).getResume() + "\n");
                 myWriter.write(books.get(isbn).getRating().split("\\|")[0] + "\n");
-                myWriter.write(books.get(isbn).getRating().split("\\|")[1]);
+                myWriter.write(books.get(isbn).getRating().split("\\|")[1] + "\n");
+                myWriter.write(books.get(isbn).getVoters());
                 myWriter.close();
             }
         }

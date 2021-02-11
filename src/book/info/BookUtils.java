@@ -3,6 +3,7 @@ package book.info;
 import utils.ConstantValues;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.regex.Pattern;
 
 public class BookUtils {
@@ -46,11 +47,16 @@ public class BookUtils {
 
     }
 
-    public static void rateBook(HashMap<String, Book> books) {
+    public static void rateBook(HashMap<String, Book> books, String user) {
         System.out.println("Please enter ISBN number of the book you want to rate:");
         String bookisbn = ConstantValues.SC.nextLine();
 
         if (books.containsKey(bookisbn)) {
+
+            if(books.get(bookisbn).getVoters().contains(user)){
+                System.out.println("You have already voted!");
+                return;
+            }
 
             int currentVote;
             while (true) {
@@ -65,6 +71,7 @@ public class BookUtils {
 
             Book b = books.get(bookisbn);
             b.setRating(currentVote);
+            b.addVoter(user);
         } else {
             System.out.println("Book doesn't exist!");
         }

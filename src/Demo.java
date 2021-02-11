@@ -61,7 +61,7 @@ public class Demo {
                     System.out.println("You pressed 4");
                     break;
                 case 5:
-                    BookUtils.rateBook(books);
+                    BookUtils.rateBook(books, userPass.getName());
                     break;
                 case 6:
                     BookUtils.listAllBooks(books);

@@ -1,11 +1,15 @@
 package book.info;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Book {
     private String isbn;
     private String title;
     private String author;
     private String resume;
     private double[] rating = new double[3];
+    private HashSet<String> voters = new HashSet<>();
 
     public String getIsbn() {
         return isbn;
@@ -50,6 +54,18 @@ public class Book {
         this.rating[1]++;
         this.rating[2] = Math.round(this.rating[0] / this.rating[1] * 100.00) / 100.00;
 
+    }
+
+    public String getVoters(){
+        return String.join(",", this.voters);
+    }
+
+    public void setVoters(HashSet<String> set){
+        this.voters.addAll(set);
+    }
+
+    public void addVoter(String user){
+        this.voters.add(user);
     }
 
     public String toString() {
