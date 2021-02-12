@@ -7,6 +7,7 @@ import utils.ConstantValues;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class Demo {
     public static void main(String[] args) throws IOException {
@@ -41,10 +42,20 @@ public class Demo {
 
             UserMenuOptions.mainMenu();
 
-            byte num = ConstantValues.SC.nextByte();
-            ConstantValues.SC.nextLine();
+            String input;
+            while(true){
+                input = ConstantValues.SC.nextLine();
+                if(!Pattern.matches("[0-6]", input)){
+                    System.out.println("Invalid input! Please enter a number between 0 and 6");
+                }
+                else{
+                    break;
+                }
+            }
 
-            switch (num) {
+
+
+            switch (Integer.parseInt(input)) {
                 case 0:
                     System.out.println("Thank you for using the library, " + userPass.getName() + " :)");
                     break main_loop;
@@ -58,7 +69,7 @@ public class Demo {
                     System.out.println("You pressed 3");
                     break;
                 case 4:
-                    System.out.println("You pressed 4");
+                    BookUtils.addToFavorites(books, userPass.getName());
                     break;
                 case 5:
                     BookUtils.rateBook(books, userPass.getName());

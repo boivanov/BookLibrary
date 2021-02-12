@@ -10,6 +10,8 @@ public class Book {
     private String resume;
     private double[] rating = new double[3];
     private HashSet<String> voters = new HashSet<>();
+    private HashSet<String> favorites = new HashSet<>();
+    private HashSet<String> reviews = new HashSet<>();
 
     public String getIsbn() {
         return isbn;
@@ -50,22 +52,43 @@ public class Book {
 
     public void setRating(double currentVote) {
 
-        this.rating[0] += currentVote;
-        this.rating[1]++;
-        this.rating[2] = Math.round(this.rating[0] / this.rating[1] * 100.00) / 100.00;
-
+        if (currentVote == 0) {
+            this.rating[0] = 0;
+            this.rating[1] = 0;
+            this.rating[2] = 0;
+        } else {
+            this.rating[0] += currentVote;
+            this.rating[1]++;
+            this.rating[2] = Math.round(this.rating[0] / this.rating[1] * 100.00) / 100.00;
+        }
     }
 
-    public String getVoters(){
+    public String getVoters() {
         return String.join(",", this.voters);
     }
 
-    public void setVoters(HashSet<String> set){
+    public void setVoters(HashSet<String> set) {
         this.voters.addAll(set);
     }
 
-    public void addVoter(String user){
+    public void addVoter(String user) {
         this.voters.add(user);
+    }
+
+    public String getFavorites() {
+        return String.join(",", this.favorites);
+    }
+
+    public void setFavorites(HashSet<String> set) {
+        this.favorites.addAll(set);
+    }
+
+    public void addFavorite(String user) {
+        this.favorites.add(user);
+    }
+
+    public void getReviews() {
+
     }
 
     public String toString() {

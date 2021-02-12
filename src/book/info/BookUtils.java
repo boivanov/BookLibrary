@@ -2,6 +2,7 @@ package book.info;
 
 import utils.ConstantValues;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.regex.Pattern;
@@ -53,7 +54,7 @@ public class BookUtils {
 
         if (books.containsKey(bookisbn)) {
 
-            if(books.get(bookisbn).getVoters().contains(user)){
+            if (books.get(bookisbn).getVoters().contains(user)) {
                 System.out.println("You have already voted!");
                 return;
             }
@@ -72,17 +73,50 @@ public class BookUtils {
             Book b = books.get(bookisbn);
             b.setRating(currentVote);
             b.addVoter(user);
+            System.out.println("You have successfully rated the book.");
         } else {
             System.out.println("Book doesn't exist!");
         }
     }
 
-    public static void writeResume(HashMap<String, Book> books) {
+    public static void writeReview(HashMap<String, Book> books) {
         System.out.println("Please enter ISBN number of the book you want to write a resume to:");
         String bookisbn = ConstantValues.SC.nextLine();
 
         if (books.containsKey(bookisbn)) {
             System.out.println("asd");
+        } else {
+            System.out.println("Book doesn't exist!");
+        }
+    }
+
+    public static void addToFavorites(HashMap<String, Book> books, String user) {
+
+        System.out.println("Please enter ISBN number of the book you want to add to favorites:");
+        String bookisbn = ConstantValues.SC.nextLine();
+
+        byte count = 0;
+        for (Book a : books.values()){
+            if(a.getFavorites().contains(user)){
+                count++;
+            }
+        }
+        if (count >= 10){
+            System.out.println("You already have 10 favorite books.");
+            return;
+        }
+
+        if (books.containsKey(bookisbn)) {
+
+            if (Arrays.asList(books.get(bookisbn).getFavorites().split(",")).contains(user)){
+                System.out.println("This book is already in your favorites!");
+                return;
+            }
+
+            Book b = books.get(bookisbn);
+            b.addFavorite(user);
+            System.out.println("You have successfully added the book to your favorites.");
+
         } else {
             System.out.println("Book doesn't exist!");
         }
