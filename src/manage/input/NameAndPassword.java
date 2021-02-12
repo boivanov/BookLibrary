@@ -30,7 +30,7 @@ public class NameAndPassword {
     public void setName() {
         //Read user name and check if it is valid, if not, reread.
         while (true) {
-            System.out.println("Please enter user name:");
+            System.out.print("Please enter user name: ");
             String a = ConstantValues.SC.nextLine().toLowerCase();
             if (validateInput(a)) {
                 System.out.println("User name should be between 4-8 symbols long, having letters or numbers only.");
@@ -47,11 +47,19 @@ public class NameAndPassword {
 
     public void setPassword() {
         //Read password and check if it is valid, if not, reread.
+
+        byte count = 4;
         while (true) {
-            System.out.println("Please enter password:");
+            System.out.print("Please enter password: ");
             String b = ConstantValues.SC.nextLine();
             if (validateInput(b)) {
+                count--;
                 System.out.println("Password should be between 4-8 symbols long, having letters or numbers only.");
+                System.out.println("" + count + " retries left.");
+                if (count == 0){
+                    System.out.println("Please try again later.");
+                    System.exit(0);
+                }
             } else {
                 this.password = b;
                 break;

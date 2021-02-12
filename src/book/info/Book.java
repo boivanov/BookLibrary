@@ -63,8 +63,8 @@ public class Book {
         }
     }
 
-    public String getVoters() {
-        return String.join(",", this.voters);
+    public HashSet<String> getVoters() {
+        return this.voters;
     }
 
     public void setVoters(HashSet<String> set) {
@@ -75,8 +75,8 @@ public class Book {
         this.voters.add(user);
     }
 
-    public String getFavorites() {
-        return String.join(",", this.favorites);
+    public HashSet<String> getFavorites() {
+        return this.favorites;
     }
 
     public void setFavorites(HashSet<String> set) {
@@ -85,6 +85,10 @@ public class Book {
 
     public void addFavorite(String user) {
         this.favorites.add(user);
+    }
+
+    public void removeFavorite(String user) {
+        this.favorites.remove(user);
     }
 
     public void getReviews() {

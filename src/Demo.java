@@ -31,7 +31,11 @@ public class Demo {
                 }
             }
         } else {
-            UserOperations.createUserFile(userPass.getName(), userPass.getPassword());
+            try {
+                UserOperations.createUserFile(userPass.getName(), userPass.getPassword());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         //Load current library
@@ -42,18 +46,15 @@ public class Demo {
 
             UserMenuOptions.mainMenu();
 
-            String input;
-            while(true){
+            String input = "";
+            while (true) {
                 input = ConstantValues.SC.nextLine();
-                if(!Pattern.matches("[0-6]", input)){
+                if (!Pattern.matches("[0-6]", input)) {
                     System.out.println("Invalid input! Please enter a number between 0 and 6");
-                }
-                else{
+                } else {
                     break;
                 }
             }
-
-
 
             switch (Integer.parseInt(input)) {
                 case 0:
@@ -69,7 +70,37 @@ public class Demo {
                     System.out.println("You pressed 3");
                     break;
                 case 4:
-                    BookUtils.addToFavorites(books, userPass.getName());
+                    System.out.println("You are now in the favorites menu.");
+
+                    favorites_loop:
+                    while (true) {
+                        UserMenuOptions.favoritesMenu();
+
+                        String favoriteInput = "";
+                        while (true) {
+                            input = ConstantValues.SC.nextLine();
+                            if (!Pattern.matches("[0-3]", input)) {
+                                System.out.println("Invalid input! Please enter a number between 0 and 3");
+                            } else {
+                                break;
+                            }
+                        }
+                        switch (Integer.parseInt(input)) {
+                            case 0:
+                                break favorites_loop;
+                            case 1:
+                                BookUtils.showFavorites(books, userPass.getName());
+                                break;
+                            case 2:
+                                BookUtils.addToFavorites(books, userPass.getName());
+                                break;
+                            case 3:
+                                BookUtils.removeBookFavorites(books, userPass.getName());
+                                break;
+                            default:
+                                System.out.println("Please enter valid number.");
+                        }
+                    }
                     break;
                 case 5:
                     BookUtils.rateBook(books, userPass.getName());

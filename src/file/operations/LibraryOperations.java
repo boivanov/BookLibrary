@@ -66,14 +66,14 @@ public class LibraryOperations {
             myWriter.write(books.get(isbn).getRating().split("\\|")[0] + "\n");
             myWriter.write(books.get(isbn).getRating().split("\\|")[1] + "\n");
             if (books.get(isbn).getVoters().isEmpty()) {
-                myWriter.write("\n");
+                myWriter.write(" " + "\n");
             } else {
-                myWriter.write(books.get(isbn).getVoters());
+                myWriter.write(String.join(",", books.get(isbn).getVoters()) + "\n");
             }
             if (books.get(isbn).getFavorites().isEmpty()) {
-                myWriter.write("\n");
+                myWriter.write(" ");
             } else {
-                myWriter.write(books.get(isbn).getFavorites());
+                myWriter.write(String.join(",", books.get(isbn).getFavorites()));
             }
             myWriter.close();
         }
