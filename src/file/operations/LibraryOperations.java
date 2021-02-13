@@ -37,6 +37,7 @@ public class LibraryOperations {
             }
             b.setVoters(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setFavorites(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
+            b.setOwner(bufferreader.readLine());
 
             h.put(b.getIsbn(), b);
         }
@@ -71,10 +72,11 @@ public class LibraryOperations {
                 myWriter.write(String.join(",", books.get(isbn).getVoters()) + "\n");
             }
             if (books.get(isbn).getFavorites().isEmpty()) {
-                myWriter.write(" ");
+                myWriter.write(" " + "\n");
             } else {
-                myWriter.write(String.join(",", books.get(isbn).getFavorites()));
+                myWriter.write(String.join(",", books.get(isbn).getFavorites()) + "\n");
             }
+            myWriter.write(books.get(isbn).getOwner());
             myWriter.close();
         }
 

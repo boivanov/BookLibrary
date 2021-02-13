@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class BookUtils {
 
-    public static void addBook(HashMap<String, Book> books) {
+    public static void addBook(HashMap<String, Book> books, String user) {
 
         Book x = new Book();
 
@@ -33,6 +33,8 @@ public class BookUtils {
         System.out.print("Please enter the resume: ");
         String resume = ConstantValues.SC.nextLine();
         x.setResume(resume);
+
+        x.setOwner(user);
 
         books.put(isbn, x);
         System.out.println("The following book has been added successfully.");
@@ -103,9 +105,6 @@ public class BookUtils {
 
     public static void addToFavorites(HashMap<String, Book> books, String user) {
 
-        System.out.print("Please enter ISBN number of the book you want to add to favorites: ");
-        String bookisbn = ConstantValues.SC.nextLine();
-
         byte count = 0;
         for (Book a : books.values()) {
             if (a.getFavorites().contains(user)) {
@@ -116,6 +115,9 @@ public class BookUtils {
             System.out.println("You already have 10 favorite books.");
             return;
         }
+
+        System.out.print("Please enter ISBN number of the book you want to add to favorites: ");
+        String bookisbn = ConstantValues.SC.nextLine();
 
         if (books.containsKey(bookisbn)) {
 
@@ -143,12 +145,11 @@ public class BookUtils {
             }
         }
 
-        if(!arr.isEmpty()){
-            for(Book a: arr){
+        if (!arr.isEmpty()) {
+            for (Book a : arr) {
                 System.out.println(a);
             }
-        }
-        else {
+        } else {
             System.out.println("You do not have any books in favorites.");
         }
     }
@@ -165,5 +166,33 @@ public class BookUtils {
         } else {
             System.out.println("Book with ISBN: " + bookisbn + " does not exist in the library.");
         }
+    }
+
+    public static void editBook(HashMap<String, Book> books, String user, byte choice) {
+
+        System.out.print("Please enter the ISBN of the book you want to edit: ");
+        String isbn = ConstantValues.SC.nextLine();
+
+        if (!books.containsKey(isbn)) {
+            System.out.println("The book with ISBN: " + isbn + " does not exist!");
+        } else if (books.containsKey(isbn) && !books.get(isbn).getOwner().equals(user)) {
+            System.out.println("You cannot edit the book with ISBN: " + isbn);
+        } else {
+            if (choice == 1) {
+                System.out.print("Please enter the new author: ");
+                String author = ConstantValues.SC.nextLine();
+
+                books.get(isbn).setAuthor(author);
+                System.out.print("You have successfully updated the author for book with ISBN: " + isbn);
+            } else if (choice == 2) {
+                System.out.print("Please enter the new resume: ");
+                String resume = ConstantValues.SC.nextLine();
+
+                books.get(isbn).setResume(resume);
+                System.out.print("You have successfully updated the resume for book with ISBN: " + isbn);
+            }
+
+        }
+
     }
 }

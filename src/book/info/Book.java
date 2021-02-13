@@ -12,6 +12,7 @@ public class Book {
     private HashSet<String> voters = new HashSet<>();
     private HashSet<String> favorites = new HashSet<>();
     private HashSet<String> reviews = new HashSet<>();
+    private String owner;
 
     public String getIsbn() {
         return isbn;
@@ -93,6 +94,14 @@ public class Book {
 
     public void getReviews() {
 
+    }
+
+    public String getOwner(){
+        return this.owner;
+    }
+
+    public void setOwner(String owner){
+        this.owner = owner;
     }
 
     public String toString() {

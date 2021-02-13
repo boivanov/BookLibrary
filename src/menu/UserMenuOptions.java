@@ -23,4 +23,12 @@ public class UserMenuOptions {
         System.out.println("");
     }
 
+    public static void editMenu(){
+        System.out.println("");
+        System.out.println("Press 0 to go back to the main menu.");
+        System.out.println("Press 1 to edit the author.");
+        System.out.println("Press 2 to edit the resume.");
+        System.out.println("");
+    }
+
 }

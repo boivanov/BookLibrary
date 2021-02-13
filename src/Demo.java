@@ -61,13 +61,40 @@ public class Demo {
                     System.out.println("Thank you for using the library, " + userPass.getName() + " :)");
                     break main_loop;
                 case 1:
-                    BookUtils.addBook(books);
+                    BookUtils.addBook(books, userPass.getName());
                     break;
                 case 2:
                     System.out.println("You pressed 2");
                     break;
                 case 3:
-                    System.out.println("You pressed 3");
+                    System.out.println("You are now editing a book.");
+
+                    edit_loop:
+                    while (true) {
+                        UserMenuOptions.editMenu();
+
+                        String editInput = "";
+                        while (true) {
+                            input = ConstantValues.SC.nextLine();
+                            if (!Pattern.matches("[0-2]", input)) {
+                                System.out.println("Invalid input! Please enter a number between 0 and 2");
+                            } else {
+                                break;
+                            }
+                        }
+                        switch (Byte.parseByte(input)) {
+                            case 0:
+                                break edit_loop;
+                            case 1:
+                                BookUtils.editBook(books, userPass.getName(), (byte) 1);
+                                break;
+                            case 2:
+                                BookUtils.editBook(books, userPass.getName(), (byte) 2);
+                                break;
+                            default:
+                                System.out.println("Please enter valid number.");
+                        }
+                    }
                     break;
                 case 4:
                     System.out.println("You are now in the favorites menu.");
