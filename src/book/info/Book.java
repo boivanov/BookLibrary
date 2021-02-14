@@ -131,7 +131,7 @@ public class Book {
     }
 
     public String toString() {
-        return "ISBN:" + this.isbn +
+        return "ISBN: " + this.isbn +
                 ", Title: " + this.title +
                 ", Author: " + this.author +
                 ", Resume: " + this.resume +

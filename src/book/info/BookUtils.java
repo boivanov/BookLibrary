@@ -1,5 +1,7 @@
 package book.info;
 
+import menu.UserMenuOptions;
+import utils.ConsoleOperations;
 import utils.ConstantValues;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class BookUtils {
         System.out.print("Please enter the resume: ");
         String resume = ConstantValues.SC.nextLine();
         x.setResume(resume);
+        ConsoleOperations.clearConsole();
 
         x.setOwner(user);
 
@@ -46,6 +49,8 @@ public class BookUtils {
     }
 
     public static void listAllBooks(HashMap<String, Book> books) {
+
+        ConsoleOperations.clearConsole();
 
         if (!books.isEmpty()) {
 
@@ -62,6 +67,9 @@ public class BookUtils {
     }
 
     public static void rateBook(HashMap<String, Book> books, String user) {
+
+        ConsoleOperations.clearConsole();
+
         System.out.print("Please enter ISBN number of the book you want to rate: ");
         String bookisbn = ConstantValues.SC.nextLine();
 
@@ -74,6 +82,7 @@ public class BookUtils {
 
             String currentVote;
             while (true) {
+                ConsoleOperations.clearConsole();
                 System.out.print("Please enter the rating from 1 to 5: ");
                 currentVote = ConstantValues.SC.nextLine();
                 if (!Pattern.matches("[1-5]", currentVote)) {
@@ -93,6 +102,7 @@ public class BookUtils {
     }
 
     public static void writeReview(HashMap<String, Book> books, String user) {
+        ConsoleOperations.clearConsole();
         System.out.print("Please enter ISBN number of the book you want to write a resume to: ");
         String bookisbn = ConstantValues.SC.nextLine();
 
@@ -100,12 +110,16 @@ public class BookUtils {
             System.out.print("Please write the review: ");
             String comment = ConstantValues.SC.nextLine();
             books.get(bookisbn).addReview(user + ": " + comment);
+            System.out.println("You have successfully written a review for the book with ISBN: " + bookisbn);
         } else {
             System.out.println("Book doesn't exist!");
         }
     }
 
     public static void listReviews(HashMap<String, Book> books) {
+
+        ConsoleOperations.clearConsole();
+
         System.out.print("Please enter ISBN number of the book you want to read the reviews for: ");
         String bookisbn = ConstantValues.SC.nextLine();
 
@@ -120,6 +134,8 @@ public class BookUtils {
     }
 
     public static void addToFavorites(HashMap<String, Book> books, String user) {
+
+        ConsoleOperations.clearConsole();
 
         byte count = 0;
         for (Book a : books.values()) {
@@ -153,6 +169,8 @@ public class BookUtils {
 
     public static void showFavorites(HashMap<String, Book> books, String user) {
 
+        ConsoleOperations.clearConsole();
+
         ArrayList<Book> arr = new ArrayList<>();
 
         for (Book a : books.values()) {
@@ -171,6 +189,9 @@ public class BookUtils {
     }
 
     public static void removeBookFavorites(HashMap<String, Book> books, String user) {
+
+        ConsoleOperations.clearConsole();
+
         System.out.print("Please enter ISBN number of the book you want to remove from favorites: ");
         String bookisbn = ConstantValues.SC.nextLine();
 
@@ -185,6 +206,8 @@ public class BookUtils {
     }
 
     public static void editBook(HashMap<String, Book> books, String user, byte choice) {
+
+        ConsoleOperations.clearConsole();
 
         System.out.print("Please enter the ISBN of the book you want to edit: ");
         String isbn = ConstantValues.SC.nextLine();
@@ -214,6 +237,8 @@ public class BookUtils {
 
     public static void addToPersonal(HashMap<String, Book> books, String user) {
 
+        ConsoleOperations.clearConsole();
+
         System.out.print("Please enter ISBN number of the book you want to add to your personal library: ");
         String bookisbn = ConstantValues.SC.nextLine();
 
@@ -235,6 +260,8 @@ public class BookUtils {
 
     public static void showPersonal(HashMap<String, Book> books, String user) {
 
+        ConsoleOperations.clearConsole();
+
         ArrayList<Book> arr = new ArrayList<>();
 
         for (Book a : books.values()) {
@@ -253,6 +280,9 @@ public class BookUtils {
     }
 
     public static void removeBookPersonal(HashMap<String, Book> books, String user) {
+
+        ConsoleOperations.clearConsole();
+
         System.out.print("Please enter ISBN number of the book you want to remove from your personal library: ");
         String bookisbn = ConstantValues.SC.nextLine();
 

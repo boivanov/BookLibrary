@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
+import utils.ConsoleOperations;
 import utils.ConstantValues;
 
 public class NameAndPassword {
@@ -35,6 +36,7 @@ public class NameAndPassword {
             if (validateInput(a)) {
                 System.out.println("User name should be between 4-8 symbols long, having letters or numbers only.");
             } else {
+                ConsoleOperations.clearConsole();
                 this.name = a;
                 break;
             }
@@ -61,6 +63,7 @@ public class NameAndPassword {
                     System.exit(0);
                 }
             } else {
+                ConsoleOperations.clearConsole();
                 this.password = b;
                 break;
             }
