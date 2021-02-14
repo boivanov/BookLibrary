@@ -2,6 +2,7 @@ package manage.input;
 
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -53,7 +54,7 @@ public class NameAndPassword {
         byte count = 4;
         while (true) {
             System.out.print("Please enter password: ");
-            String b = ConstantValues.SC.nextLine();
+            String b = new String(System.console().readPassword());
             if (validateInput(b)) {
                 count--;
                 System.out.println("Password should be between 4-8 symbols long, having letters or numbers only.");

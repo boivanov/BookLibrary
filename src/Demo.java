@@ -4,13 +4,13 @@ import file.operations.*;
 import manage.input.*;
 import menu.UserMenuOptions;
 import utils.ConsoleOperations;
-import utils.ConstantValues;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class Demo {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
         byte choice;
 
@@ -28,22 +28,26 @@ public class Demo {
                 cnt = 3;
                 while (true) {
                     cnt--;
-                    if (UserOperations.userExists(userPass.getName())
-                            && NameAndPassword.validatePassword(userPass.getName(), userPass.getPassword())) {
-                        ConsoleOperations.clearConsole();
-                        System.out.printf("Hello, %s! You have successfully logged in.", userPass.getName());
-                        System.out.println("");
-                        break;
-                    } else {
-                        if (cnt == 0) {
+                    try {
+                        if (UserOperations.userExists(userPass.getName())
+                                && NameAndPassword.validatePassword(userPass.getName(), userPass.getPassword())) {
                             ConsoleOperations.clearConsole();
-                            System.out.println("Please try again later!");
-                            System.exit(0);
+                            System.out.printf("Hello, %s! You have successfully logged in.", userPass.getName());
+                            System.out.println("");
+                            break;
+                        } else {
+                            if (cnt == 0) {
+                                ConsoleOperations.clearConsole();
+                                System.out.println("Please try again later!");
+                                System.exit(0);
+                            }
+                            System.out.println("User name or password is incorrect, please try again!");
+                            System.out.println(cnt + " retries left.");
+                            userPass.setName();
+                            userPass.setPassword();
                         }
-                        System.out.println("User name or password is incorrect, please try again!");
-                        System.out.println(cnt + " retries left.");
-                        userPass.setName();
-                        userPass.setPassword();
+                    } catch (IOException e) {
+                        System.out.println("Something went wrong!");
                     }
                 }
                 break;
@@ -54,7 +58,11 @@ public class Demo {
                         userPass.setName();
                         userPass.setPassword();
                     } else {
-                        UserOperations.createUserFile(userPass.getName(), userPass.getPassword());
+                        try {
+                            UserOperations.createUserFile(userPass.getName(), userPass.getPassword());
+                        } catch (IOException e) {
+                            System.out.println("Something went wrong!");
+                        }
                         System.out.println("You registration has been successful.\n");
                         break;
                     }
@@ -65,8 +73,21 @@ public class Demo {
                 System.out.println("");
         }
 
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            System.out.println("Something went wrong!");
+        }
+
         //Load current library
-        HashMap<String, Book> books = LibraryOperations.readLibrary();
+        HashMap<String, Book> books = null;
+        try {
+            books = LibraryOperations.readLibrary();
+        } catch (IOException e) {
+            System.out.println("Something went wrong!");
+            System.out.println("Exiting the library...");
+            System.exit(0);
+        }
 
         main_loop:
         while (true) {
@@ -80,7 +101,9 @@ public class Demo {
                     break main_loop;
                 case 1:
                     BookUtils.addBook(books, userPass.getName());
-                    UserMenuOptions.wouldYouContinue(userPass.getName());
+                    if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                        break main_loop;
+                    }
                     break;
                 case 2:
                     System.out.println("You are now in the reviews menu");
@@ -95,11 +118,15 @@ public class Demo {
                                 break review_loop;
                             case 1:
                                 BookUtils.listReviews(books);
-                                UserMenuOptions.wouldYouContinue(userPass.getName());
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             case 2:
                                 BookUtils.writeReview(books, userPass.getName());
-                                UserMenuOptions.wouldYouContinue(userPass.getName());
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             default:
                                 System.out.println("Please enter valid number.");
@@ -119,17 +146,20 @@ public class Demo {
                                 break edit_loop;
                             case 1:
                                 BookUtils.editBook(books, userPass.getName(), (byte) 1);
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             case 2:
                                 BookUtils.editBook(books, userPass.getName(), (byte) 2);
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             default:
                                 System.out.println("Please enter valid number.");
                         }
                     }
-
-                    UserMenuOptions.wouldYouContinue(userPass.getName());
-
                     break;
                 case 4:
                     System.out.println("You are now in the favorites menu.");
@@ -144,23 +174,26 @@ public class Demo {
                                 break favorites_loop;
                             case 1:
                                 BookUtils.showFavorites(books, userPass.getName());
-                                UserMenuOptions.wouldYouContinue(userPass.getName());
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             case 2:
                                 BookUtils.addToFavorites(books, userPass.getName());
-                                UserMenuOptions.wouldYouContinue(userPass.getName());
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             case 3:
                                 BookUtils.removeBookFavorites(books, userPass.getName());
-                                UserMenuOptions.wouldYouContinue(userPass.getName());
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             default:
                                 System.out.println("Please enter valid number.");
                         }
                     }
-
-                    UserMenuOptions.wouldYouContinue(userPass.getName());
-
                     break;
                 case 5:
                     System.out.println("You are now in the personal menu.");
@@ -174,31 +207,38 @@ public class Demo {
                                 break personal_loop;
                             case 1:
                                 BookUtils.showPersonal(books, userPass.getName());
-                                UserMenuOptions.wouldYouContinue(userPass.getName());
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             case 2:
                                 BookUtils.addToPersonal(books, userPass.getName());
-                                UserMenuOptions.wouldYouContinue(userPass.getName());
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             case 3:
                                 BookUtils.removeBookPersonal(books, userPass.getName());
-                                UserMenuOptions.wouldYouContinue(userPass.getName());
+                                if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                                    break main_loop;
+                                }
                                 break;
                             default:
                                 System.out.println("Please enter valid number.");
                         }
                     }
-
-                    UserMenuOptions.wouldYouContinue(userPass.getName());
-
                     break;
                 case 6:
                     BookUtils.rateBook(books, userPass.getName());
-                    UserMenuOptions.wouldYouContinue(userPass.getName());
+                    if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                        break main_loop;
+                    }
                     break;
                 case 7:
                     BookUtils.listAllBooks(books);
-                    UserMenuOptions.wouldYouContinue(userPass.getName());
+                    if (!UserMenuOptions.wouldYouContinue(userPass.getName())) {
+                        break main_loop;
+                    }
                     break;
                 default:
                     System.out.println("Please enter valid number");
@@ -206,7 +246,11 @@ public class Demo {
         }
 
         //Write the current state of the library.
-        LibraryOperations.writeLibrary(books);
+        try {
+            LibraryOperations.writeLibrary(books);
+        } catch (IOException e) {
+            System.out.println("Something went wrong!");
+        }
 
 
     }

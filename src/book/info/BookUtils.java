@@ -76,7 +76,7 @@ public class BookUtils {
         if (books.containsKey(bookisbn)) {
 
             if (books.get(bookisbn).getVoters().contains(user)) {
-                System.out.println("You have already voted!");
+                System.out.println("You have already voted for this book!");
                 return;
             }
 
@@ -275,7 +275,7 @@ public class BookUtils {
                 System.out.println(a);
             }
         } else {
-            System.out.println("You do not have any books in favorites.");
+            System.out.println("You do not have any books in your personal library.");
         }
     }
 

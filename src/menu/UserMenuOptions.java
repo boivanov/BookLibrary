@@ -3,7 +3,6 @@ package menu;
 import utils.ConsoleOperations;
 import utils.ConstantValues;
 
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class UserMenuOptions {
@@ -116,18 +115,18 @@ public class UserMenuOptions {
         }
     }
 
-    public static void wouldYouContinue(String user) {
+    public static boolean wouldYouContinue(String user) {
 
         while (true) {
-            System.out.println("\nWould you like to continue (yes/no): ");
+            System.out.print("\nWould you like to continue (yes/no): ");
             String input = ConstantValues.SC.nextLine();
             if (input.equalsIgnoreCase("yes")){
-                break;
+                return true;
             }
             else if (input.equalsIgnoreCase("no")){
                 ConsoleOperations.clearConsole();
                 System.out.println("\n Thank you for using the library, " + user + " :)");
-                System.exit(0);
+                return false;
             }
             else {
                 System.out.println("Invalid input, please write yes or no.");
