@@ -37,8 +37,9 @@ public class LibraryOperations {
             }
             b.setVoters(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setFavorites(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
+            b.setPersonal(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setOwner(bufferreader.readLine());
-            b.setReviews(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
+            b.setReviews(new HashSet<>(Arrays.asList(bufferreader.readLine().split("|"))));
 
             h.put(b.getIsbn(), b);
         }
@@ -77,8 +78,17 @@ public class LibraryOperations {
             } else {
                 myWriter.write(String.join(",", books.get(isbn).getFavorites()) + "\n");
             }
+            if (books.get(isbn).getPersonal().isEmpty()) {
+                myWriter.write(" " + "\n");
+            } else {
+                myWriter.write(String.join(",", books.get(isbn).getPersonal()) + "\n");
+            }
             myWriter.write(books.get(isbn).getOwner() + "\n");
-            myWriter.write(books.get(isbn).getReviews());
+            if (books.get(isbn).getReviews().isEmpty()) {
+                myWriter.write(" " + "\n");
+            } else {
+                myWriter.write(String.join("|", books.get(isbn).getReviews()) + "\n");
+            }
             myWriter.close();
         }
 

@@ -19,7 +19,7 @@ public class NameAndPassword {
 
     public static boolean validatePassword(String user, String password) throws IOException {
         BufferedReader bufferreader =
-                new BufferedReader(new FileReader(ConstantValues.DIR_USERS.toString()+String.format("\\%s.txt", user)));
+                new BufferedReader(new FileReader(ConstantValues.DIR_USERS.toString() + String.format("\\%s.txt", user)));
         return bufferreader.readLine().equals(password);
     }
 
@@ -56,7 +56,7 @@ public class NameAndPassword {
                 count--;
                 System.out.println("Password should be between 4-8 symbols long, having letters or numbers only.");
                 System.out.println("" + count + " retries left.");
-                if (count == 0){
+                if (count == 0) {
                     System.out.println("Please try again later.");
                     System.exit(0);
                 }

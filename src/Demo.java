@@ -157,7 +157,37 @@ public class Demo {
                     }
                     break;
                 case 5:
-                    System.out.println("You pressed 5");
+                    System.out.println("You are now in the personal menu.");
+
+                    personal_loop:
+                    while (true) {
+                        UserMenuOptions.personalMenu();
+
+                        String personalInput = "";
+                        while (true) {
+                            input = ConstantValues.SC.nextLine();
+                            if (!Pattern.matches("[0-3]", input)) {
+                                System.out.println("Invalid input! Please enter a number between 0 and 3");
+                            } else {
+                                break;
+                            }
+                        }
+                        switch (Integer.parseInt(input)) {
+                            case 0:
+                                break personal_loop;
+                            case 1:
+                                BookUtils.showPersonal(books, userPass.getName());
+                                break;
+                            case 2:
+                                BookUtils.addToPersonal(books, userPass.getName());
+                                break;
+                            case 3:
+                                BookUtils.removeBookPersonal(books, userPass.getName());
+                                break;
+                            default:
+                                System.out.println("Please enter valid number.");
+                        }
+                    }
                     break;
                 case 6:
                     BookUtils.rateBook(books, userPass.getName());

@@ -2,7 +2,7 @@ package menu;
 
 public class UserMenuOptions {
 
-    public static void mainMenu(){
+    public static void mainMenu() {
         System.out.println("");
         System.out.println("Press 1 to add a book.");
         System.out.println("Press 2 to write a review");
@@ -15,7 +15,7 @@ public class UserMenuOptions {
         System.out.println("");
     }
 
-    public static void favoritesMenu(){
+    public static void favoritesMenu() {
         System.out.println("");
         System.out.println("Press 0 to go back to the main menu.");
         System.out.println("Press 1 to list all books");
@@ -24,7 +24,7 @@ public class UserMenuOptions {
         System.out.println("");
     }
 
-    public static void editMenu(){
+    public static void editMenu() {
         System.out.println("");
         System.out.println("Press 0 to go back to the main menu.");
         System.out.println("Press 1 to edit the author.");
@@ -32,7 +32,7 @@ public class UserMenuOptions {
         System.out.println("");
     }
 
-    public static void personalMenu(){
+    public static void personalMenu() {
         System.out.println("");
         System.out.println("Press 0 to go back to the main menu.");
         System.out.println("Press 1 to list all books in your personal library.");
@@ -41,7 +41,7 @@ public class UserMenuOptions {
         System.out.println("");
     }
 
-    public static void reviewMenu(){
+    public static void reviewMenu() {
         System.out.println("");
         System.out.println("Press 0 to go back to the main menu.");
         System.out.println("Press 1 to read reviews for a book.");

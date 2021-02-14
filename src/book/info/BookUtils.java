@@ -105,16 +105,16 @@ public class BookUtils {
         }
     }
 
-    public static void listReviews(HashMap<String, Book> books){
+    public static void listReviews(HashMap<String, Book> books) {
         System.out.print("Please enter ISBN number of the book you want to read the reviews for: ");
         String bookisbn = ConstantValues.SC.nextLine();
 
-        if(!books.containsKey(bookisbn)){
+        if (!books.containsKey(bookisbn)) {
             System.out.println("Book with ISBN: " + bookisbn + " does not exist in the library.");
-        } else if (books.get(bookisbn).getReviews().isEmpty()){
+        } else if (books.get(bookisbn).getReviews().isEmpty()) {
             System.out.println("There are no reviews for the book with ISBN: " + bookisbn);
         } else {
-            System.out.println(books.get(bookisbn).getReviews().replace("|", "\n"));
+            System.out.println(String.join("|", books.get(bookisbn).getReviews()).replace("|", "\n"));
         }
 
     }
@@ -210,5 +210,59 @@ public class BookUtils {
 
         }
 
+    }
+
+    public static void addToPersonal(HashMap<String, Book> books, String user) {
+
+        System.out.print("Please enter ISBN number of the book you want to add to your personal library: ");
+        String bookisbn = ConstantValues.SC.nextLine();
+
+        if (books.containsKey(bookisbn)) {
+
+            if (books.get(bookisbn).getPersonal().contains(user)) {
+                System.out.println("This book is already in your personal library!");
+                return;
+            }
+
+            Book b = books.get(bookisbn);
+            b.addPersonal(user);
+            System.out.println("You have successfully added the book to your personal library.");
+
+        } else {
+            System.out.println("Book doesn't exist!");
+        }
+    }
+
+    public static void showPersonal(HashMap<String, Book> books, String user) {
+
+        ArrayList<Book> arr = new ArrayList<>();
+
+        for (Book a : books.values()) {
+            if (a.getPersonal().contains(user)) {
+                arr.add(a);
+            }
+        }
+
+        if (!arr.isEmpty()) {
+            for (Book a : arr) {
+                System.out.println(a);
+            }
+        } else {
+            System.out.println("You do not have any books in favorites.");
+        }
+    }
+
+    public static void removeBookPersonal(HashMap<String, Book> books, String user) {
+        System.out.print("Please enter ISBN number of the book you want to remove from your personal library: ");
+        String bookisbn = ConstantValues.SC.nextLine();
+
+        if (books.containsKey(bookisbn) && books.get(bookisbn).getPersonal().contains(user)) {
+            books.get(bookisbn).removePersonal(user);
+            System.out.println("The book with ISBN: " + bookisbn + " has been removed from your personal library.");
+        } else if (books.containsKey(bookisbn)) {
+            System.out.println("The book with ISBN: " + bookisbn + " is not in your personal library.");
+        } else {
+            System.out.println("Book with ISBN: " + bookisbn + " does not exist in the library.");
+        }
     }
 }

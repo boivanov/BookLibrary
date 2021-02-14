@@ -13,6 +13,7 @@ public class Book {
     private HashSet<String> voters = new HashSet<>();
     private HashSet<String> favorites = new HashSet<>();
     private HashSet<String> reviews = new HashSet<>();
+    private HashSet<String> personal = new HashSet<>();
     private String owner;
 
     public String getIsbn() {
@@ -93,11 +94,27 @@ public class Book {
         this.favorites.remove(user);
     }
 
-    public String getReviews(){
-        return String.join("|", this.reviews);
+    public HashSet<String> getPersonal() {
+        return this.personal;
     }
 
-    public void setReviews(HashSet<String> set){
+    public void setPersonal(HashSet<String> set) {
+        this.personal.addAll(set);
+    }
+
+    public void addPersonal(String user) {
+        this.personal.add(user);
+    }
+
+    public void removePersonal(String user) {
+        this.personal.remove(user);
+    }
+
+    public HashSet<String> getReviews() {
+        return this.reviews;
+    }
+
+    public void setReviews(HashSet<String> set) {
         this.reviews.addAll(set);
     }
 
