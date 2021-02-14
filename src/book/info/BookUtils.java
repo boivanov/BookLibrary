@@ -92,15 +92,31 @@ public class BookUtils {
         }
     }
 
-    public static void writeReview(HashMap<String, Book> books) {
+    public static void writeReview(HashMap<String, Book> books, String user) {
         System.out.print("Please enter ISBN number of the book you want to write a resume to: ");
         String bookisbn = ConstantValues.SC.nextLine();
 
         if (books.containsKey(bookisbn)) {
-            System.out.println("asd");
+            System.out.print("Please write the review: ");
+            String comment = ConstantValues.SC.nextLine();
+            books.get(bookisbn).addReview(user + ": " + comment);
         } else {
             System.out.println("Book doesn't exist!");
         }
+    }
+
+    public static void listReviews(HashMap<String, Book> books){
+        System.out.print("Please enter ISBN number of the book you want to read the reviews for: ");
+        String bookisbn = ConstantValues.SC.nextLine();
+
+        if(!books.containsKey(bookisbn)){
+            System.out.println("Book with ISBN: " + bookisbn + " does not exist in the library.");
+        } else if (books.get(bookisbn).getReviews().isEmpty()){
+            System.out.println("There are no reviews for the book with ISBN: " + bookisbn);
+        } else {
+            System.out.println(books.get(bookisbn).getReviews().replace("|", "\n"));
+        }
+
     }
 
     public static void addToFavorites(HashMap<String, Book> books, String user) {

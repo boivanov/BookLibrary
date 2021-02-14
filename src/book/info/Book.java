@@ -1,6 +1,7 @@
 package book.info;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Book {
@@ -92,15 +93,23 @@ public class Book {
         this.favorites.remove(user);
     }
 
-    public void getReviews() {
-
+    public String getReviews(){
+        return String.join("|", this.reviews);
     }
 
-    public String getOwner(){
+    public void setReviews(HashSet<String> set){
+        this.reviews.addAll(set);
+    }
+
+    public void addReview(String comment) {
+        this.reviews.add(comment);
+    }
+
+    public String getOwner() {
         return this.owner;
     }
 
-    public void setOwner(String owner){
+    public void setOwner(String owner) {
         this.owner = owner;
     }
 

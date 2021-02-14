@@ -49,8 +49,8 @@ public class Demo {
             String input = "";
             while (true) {
                 input = ConstantValues.SC.nextLine();
-                if (!Pattern.matches("[0-6]", input)) {
-                    System.out.println("Invalid input! Please enter a number between 0 and 6");
+                if (!Pattern.matches("[0-7]", input)) {
+                    System.out.println("Invalid input! Please enter a number between 0 and 7");
                 } else {
                     break;
                 }
@@ -64,10 +64,37 @@ public class Demo {
                     BookUtils.addBook(books, userPass.getName());
                     break;
                 case 2:
-                    System.out.println("You pressed 2");
+                    System.out.println("You are now in the reviews menu");
+
+                    review_loop:
+                    while (true) {
+                        UserMenuOptions.reviewMenu();
+
+                        String reviewInput = "";
+                        while (true) {
+                            input = ConstantValues.SC.nextLine();
+                            if (!Pattern.matches("[0-2]", input)) {
+                                System.out.println("Invalid input! Please enter a number between 0 and 2");
+                            } else {
+                                break;
+                            }
+                        }
+                        switch (Byte.parseByte(input)) {
+                            case 0:
+                                break review_loop;
+                            case 1:
+                                BookUtils.listReviews(books);
+                                break;
+                            case 2:
+                                BookUtils.writeReview(books, userPass.getName());
+                                break;
+                            default:
+                                System.out.println("Please enter valid number.");
+                        }
+                    }
                     break;
                 case 3:
-                    System.out.println("You are now editing a book.");
+                    System.out.println("You are now in the edit book menu.");
 
                     edit_loop:
                     while (true) {
@@ -130,9 +157,12 @@ public class Demo {
                     }
                     break;
                 case 5:
-                    BookUtils.rateBook(books, userPass.getName());
+                    System.out.println("You pressed 5");
                     break;
                 case 6:
+                    BookUtils.rateBook(books, userPass.getName());
+                    break;
+                case 7:
                     BookUtils.listAllBooks(books);
                     break;
                 default:

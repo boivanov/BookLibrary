@@ -38,6 +38,7 @@ public class LibraryOperations {
             b.setVoters(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setFavorites(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setOwner(bufferreader.readLine());
+            b.setReviews(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
 
             h.put(b.getIsbn(), b);
         }
@@ -76,7 +77,8 @@ public class LibraryOperations {
             } else {
                 myWriter.write(String.join(",", books.get(isbn).getFavorites()) + "\n");
             }
-            myWriter.write(books.get(isbn).getOwner());
+            myWriter.write(books.get(isbn).getOwner() + "\n");
+            myWriter.write(books.get(isbn).getReviews());
             myWriter.close();
         }
 
