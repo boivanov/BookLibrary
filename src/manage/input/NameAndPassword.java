@@ -2,7 +2,6 @@ package manage.input;
 
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -65,7 +64,7 @@ public class NameAndPassword {
                 }
             } else {
                 ConsoleOperations.clearConsole();
-                this.password = b;
+                this.password = String.valueOf(b.hashCode());
                 break;
             }
         }

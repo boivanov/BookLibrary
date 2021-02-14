@@ -63,7 +63,7 @@ public class Demo {
                         } catch (IOException e) {
                             System.out.println("Something went wrong!");
                         }
-                        System.out.println("You registration has been successful.\n");
+                        System.out.println("Your registration has been successful.\n");
                         break;
                     }
                 }
