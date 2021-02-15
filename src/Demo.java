@@ -17,6 +17,7 @@ public class Demo {
 
         choice = UserMenuOptions.logInMenu();
         if (choice == 0) {
+            System.out.println("Bye and have a nice day!");
             System.exit(0);
         }
 
@@ -112,8 +113,6 @@ public class Demo {
                     }
                     break;
                 case 2:
-                    System.out.println("You are now in the reviews menu");
-
                     review_loop:
                     while (true) {
 
@@ -140,8 +139,6 @@ public class Demo {
                     }
                     break;
                 case 3:
-                    System.out.println("You are now in the edit book menu.");
-
                     edit_loop:
                     while (true) {
 
@@ -168,7 +165,6 @@ public class Demo {
                     }
                     break;
                 case 4:
-                    System.out.println("You are now in the favorites menu.");
 
                     favorites_loop:
                     while (true) {
@@ -202,7 +198,6 @@ public class Demo {
                     }
                     break;
                 case 5:
-                    System.out.println("You are now in the personal menu.");
 
                     personal_loop:
                     while (true) {

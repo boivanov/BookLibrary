@@ -11,8 +11,10 @@ public class UserMenuOptions {
 
         ConsoleOperations.clearConsole();
         System.out.println("");
-        System.out.println("You are now in the Main menu.");
-        System.out.println("");
+        System.out.println("#################################");
+        System.out.println("# You are now in the Main menu. #");
+        System.out.println("#################################");
+        System.out.println(" ");
         System.out.println("Press 1 to add a book.");
         System.out.println("Press 2 to read/write reviews.");
         System.out.println("Press 3 to edit a book.");
@@ -30,8 +32,10 @@ public class UserMenuOptions {
 
         ConsoleOperations.clearConsole();
         System.out.println("");
-        System.out.println("You are now in the favorites menu.");
-        System.out.println("");
+        System.out.println("######################################");
+        System.out.println("# You are now in the favorites menu. #");
+        System.out.println("######################################");
+        System.out.println(" ");
         System.out.println("Press 1 to list all books");
         System.out.println("Press 2 to add a book.");
         System.out.println("Press 3 to remove a book.");
@@ -45,8 +49,10 @@ public class UserMenuOptions {
 
         ConsoleOperations.clearConsole();
         System.out.println("");
-        System.out.println("You are now in the edit menu.");
-        System.out.println("");
+        System.out.println("#################################");
+        System.out.println("# You are now in the edit menu. #");
+        System.out.println("#################################");
+        System.out.println(" ");
         System.out.println("Press 0 to go back to the main menu.");
         System.out.println("Press 1 to edit the author.");
         System.out.println("Press 2 to edit the resume.");
@@ -59,8 +65,10 @@ public class UserMenuOptions {
 
         ConsoleOperations.clearConsole();
         System.out.println("");
-        System.out.println("You are now in the personal library menu.");
-        System.out.println("");
+        System.out.println("#############################################");
+        System.out.println("# You are now in the personal library menu. #");
+        System.out.println("#############################################");
+        System.out.println(" ");
         System.out.println("Press 0 to go back to the main menu.");
         System.out.println("Press 1 to list all books in your personal library.");
         System.out.println("Press 2 to add a book to your personal library.");
@@ -74,8 +82,10 @@ public class UserMenuOptions {
 
         ConsoleOperations.clearConsole();
         System.out.println("");
-        System.out.println("You are now in the read/write reviews menu.");
-        System.out.println("");
+        System.out.println("###############################################");
+        System.out.println("# You are now in the read/write reviews menu. #");
+        System.out.println("###############################################");
+        System.out.println(" ");
         System.out.println("Press 0 to go back to the main menu.");
         System.out.println("Press 1 to read reviews for a book.");
         System.out.println("Press 2 to write a review for a book.");
@@ -87,7 +97,11 @@ public class UserMenuOptions {
 
     public static byte logInMenu() {
 
-        System.out.println("\nWelcome to the Book Library! \n");
+        ConsoleOperations.clearConsole();
+        System.out.println("################################");
+        System.out.println("# Welcome to the Book Library! #");
+        System.out.println("################################");
+        System.out.println(" ");
         System.out.println("Press 1 to log in.");
         System.out.println("Press 2 to sign up.");
         System.out.println("Press 0 to Exit.");
@@ -96,7 +110,6 @@ public class UserMenuOptions {
         return validateMenuInput((byte) 0, (byte) 2);
 
     }
-
 
     private static byte validateMenuInput(byte min, byte max) {
 
