@@ -39,7 +39,7 @@ public class LibraryOperations {
             b.setFavorites(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setPersonal(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setOwner(bufferreader.readLine());
-            b.setReviews(new HashSet<>(Arrays.asList(bufferreader.readLine().split("|"))));
+            b.setReviews(new HashSet<>(Arrays.asList(bufferreader.readLine().split("\0"))));
 
             h.put(b.getIsbn(), b);
         }
@@ -87,7 +87,7 @@ public class LibraryOperations {
             if (books.get(isbn).getReviews().isEmpty()) {
                 myWriter.write(" " + "\n");
             } else {
-                myWriter.write(String.join("|", books.get(isbn).getReviews()) + "\n");
+                myWriter.write(String.join("\0", books.get(isbn).getReviews()) + "\n");
             }
             myWriter.close();
         }

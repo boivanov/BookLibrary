@@ -90,9 +90,10 @@ public class UserMenuOptions {
         System.out.println("\nWelcome to the Book Library! \n");
         System.out.println("Press 1 to log in.");
         System.out.println("Press 2 to sign up.");
+        System.out.println("Press 0 to Exit.");
         System.out.println("");
 
-        return validateMenuInput((byte) 1, (byte) 2);
+        return validateMenuInput((byte) 0, (byte) 2);
 
     }
 

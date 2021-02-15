@@ -4,17 +4,21 @@ import file.operations.*;
 import manage.input.*;
 import menu.UserMenuOptions;
 import utils.ConsoleOperations;
+import utils.LoadAnimation;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class Demo {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         byte choice;
 
         choice = UserMenuOptions.logInMenu();
+        if (choice == 0) {
+            System.exit(0);
+        }
 
         NameAndPassword userPass = new NameAndPassword();
 
@@ -74,10 +78,12 @@ public class Demo {
         }
 
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
             System.out.println("Something went wrong!");
         }
+
+        LoadAnimation.animate(100);
 
         //Load current library
         HashMap<String, Book> books = null;
@@ -251,7 +257,6 @@ public class Demo {
         } catch (IOException e) {
             System.out.println("Something went wrong!");
         }
-
 
     }
 }

@@ -103,7 +103,7 @@ public class BookUtils {
 
     public static void writeReview(HashMap<String, Book> books, String user) {
         ConsoleOperations.clearConsole();
-        System.out.print("Please enter ISBN number of the book you want to write a resume to: ");
+        System.out.print("Please enter ISBN number of the book you want to write a review for: ");
         String bookisbn = ConstantValues.SC.nextLine();
 
         if (books.containsKey(bookisbn)) {
@@ -125,7 +125,8 @@ public class BookUtils {
 
         if (!books.containsKey(bookisbn)) {
             System.out.println("Book with ISBN: " + bookisbn + " does not exist in the library.");
-        } else if (books.get(bookisbn).getReviews().isEmpty()) {
+        } else if (books.get(bookisbn).getReviews().isEmpty()
+                || (books.get(bookisbn).getReviews().size() == 1 && books.get(bookisbn).getReviews().contains(" "))) {
             System.out.println("There are no reviews for the book with ISBN: " + bookisbn);
         } else {
             System.out.println(String.join("|", books.get(bookisbn).getReviews()).replace("|", "\n"));
