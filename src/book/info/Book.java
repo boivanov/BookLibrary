@@ -1,7 +1,5 @@
 package book.info;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class Book {
@@ -9,7 +7,8 @@ public class Book {
     private String title;
     private String author;
     private String resume;
-    private double[] rating = new double[3];
+    private double sumVotes;
+    private double cntVotes;
     private HashSet<String> voters = new HashSet<>();
     private HashSet<String> favorites = new HashSet<>();
     private HashSet<String> reviews = new HashSet<>();
@@ -48,22 +47,27 @@ public class Book {
         this.resume = resume;
     }
 
-    public String getRating() {
+    public double getSumVotes() {
 
-        return "" + rating[0] + "|" + rating[1];
+        return this.sumVotes;
     }
 
-    public void setRating(double currentVote) {
+    public void setSumVotes(double currentVote) {
 
-        if (currentVote == 0) {
-            this.rating[0] = 0;
-            this.rating[1] = 0;
-            this.rating[2] = 0;
-        } else {
-            this.rating[0] += currentVote;
-            this.rating[1]++;
-            this.rating[2] = Math.round(this.rating[0] / this.rating[1] * 100.00) / 100.00;
-        }
+        this.sumVotes += currentVote;
+
+    }
+
+    public double getCntVotes(){
+        return this.cntVotes;
+    }
+
+    public void setCntVotes(double cnt){
+        this.cntVotes = cnt;
+    }
+
+    public void addCntVotes(){
+        this.cntVotes++;
     }
 
     public HashSet<String> getVoters() {
@@ -135,6 +139,6 @@ public class Book {
                 ", Title: " + this.title +
                 ", Author: " + this.author +
                 ", Resume: " + this.resume +
-                ", Rating:" + this.rating[2];
+                ", Rating:" + Math.round(this.sumVotes / this.cntVotes * 100.00) / 100.00;
     }
 }

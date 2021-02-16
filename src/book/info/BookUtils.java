@@ -93,7 +93,8 @@ public class BookUtils {
             }
 
             Book b = books.get(bookisbn);
-            b.setRating(Double.parseDouble(currentVote));
+            b.setSumVotes(Double.parseDouble(currentVote));
+            b.addCntVotes();
             b.addVoter(user);
             System.out.println("You have successfully rated the book.");
         } else {

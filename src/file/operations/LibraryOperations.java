@@ -19,8 +19,6 @@ public class LibraryOperations {
         for (String x : Objects.requireNonNull(new File(String.valueOf(ConstantValues.DIR_LIBRARY)).list())) {
 
             Book b = new Book();
-            double sumVotes;
-            double numVoters;
 
             BufferedReader bufferreader =
                     new BufferedReader(new FileReader(ConstantValues.DIR_LIBRARY.toString() + "\\" + x));
@@ -28,13 +26,8 @@ public class LibraryOperations {
             b.setTitle(bufferreader.readLine());
             b.setAuthor(bufferreader.readLine());
             b.setResume(bufferreader.readLine());
-            sumVotes = Double.parseDouble(bufferreader.readLine());
-            numVoters = Double.parseDouble(bufferreader.readLine());
-            if (sumVotes == 0 || numVoters == 0) {
-                b.setRating(0.00);
-            } else {
-                b.setRating(sumVotes / numVoters);
-            }
+            b.setSumVotes(Double.parseDouble(bufferreader.readLine()));
+            b.setCntVotes(Double.parseDouble(bufferreader.readLine()));
             b.setVoters(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setFavorites(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
             b.setPersonal(new HashSet<>(Arrays.asList(bufferreader.readLine().split(","))));
@@ -66,10 +59,10 @@ public class LibraryOperations {
             myWriter.write(books.get(isbn).getTitle() + "\n");
             myWriter.write(books.get(isbn).getAuthor() + "\n");
             myWriter.write(books.get(isbn).getResume() + "\n");
-            myWriter.write(books.get(isbn).getRating().split("\\|")[0] + "\n");
-            myWriter.write(books.get(isbn).getRating().split("\\|")[1] + "\n");
+            myWriter.write(books.get(isbn).getSumVotes() + "\n");
+            myWriter.write(books.get(isbn).getCntVotes() + "\n");
             if (books.get(isbn).getVoters().isEmpty()) {
-                myWriter.write(" " + "\n");
+                myWriter.write("\n");
             } else {
                 myWriter.write(String.join(",", books.get(isbn).getVoters()) + "\n");
             }
